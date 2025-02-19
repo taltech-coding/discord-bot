@@ -42,9 +42,9 @@ All vasakus nurgas või Alt+F12
 <img src="readme_images/terminal.png" width=90%>
 
 9. Kirjuta terminali:
+
 ```
 pip install discord 
 pip install python-dotenv
-
 ```
 
