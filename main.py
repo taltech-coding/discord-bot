@@ -16,5 +16,5 @@ async def on_ready():
 if __name__ == "__main__":
     token = config.get("TOKEN")
     if token is None:
-        raise ValueError("loo fail nimega .env ja pane sinna BOT_TOKEN=isiklik Discord Developer Portal token")
+        raise ValueError("loo fail nimega .env ja pane sinna TOKEN=isiklik Discord Developer Portal token")
     client.run(token)
