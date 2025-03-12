@@ -1,49 +1,78 @@
-Discordi Boti mall
-==================
+# 🚀 ChatBoti Töötuba
 
-1. Kopeeri init-boti repo. 
-Roheline <>code nupp esmalt, siis HTTPS "copy url to clipboard"
+- [Sissejuhatus](#sissejuhatus)
+- [Setup](#Setup)
+    - [🤖 Boti käivitamine](#-Boti-käivitamine)
+    - [💬 Sõnumite lugemine](#-Sõnumite-lugemine)
+    - [🎲 Märgusõnadele vastamine](#-Märgusõnadele-vastamine)
+    - [📜 Tsiteerimine](#-Tsiteerimine)
+    - [🐶 ASCII koer](#-ASCII-koer)
+    - [🔄Extra](#-Extra)
 
-<img src="readme_images/copy_repo.png" width=60%>
 
-2. Leia kloonimise nupp Pycharmis. 
-Pycharmi üleval vasakus ääres projekti nimi esmaslt, siis "Clone Repository..."
+## Sissejuhatus
+Rahategemine pole kunagi olnud lihtsam!
+Täna proovime kätt nii dicord.py teegi kasutamise, .env faili loomise kui ka cogside abil koodi modulleerimisega.
+Ülesannete näidislahendused leiad solutions kaustast!
 
-<img src="readme_images/pycharm_vsc.png" width=60%>
+## Setup
+Kõigepealt suundu terminali ja sisesta:
+````
+pip install discord.py python-dotenv
+````
+Nüüd loo .env fail ja määra sinna oma Discordi boti token:
+````
+TOKEN=siia_oma_boti_token
+````
 
-3. Pane URL-iks kopeeritud link. 
-Juhul, kui Directory's juba on sellenimeline kaust, lisa Directory reale mõni täht lõppu näiteks "init-bot" asemel "init-bot420".
+## 🤖 Boti käivitamine
+Failis main.py on peamine boti loogika. Kontrolli, kas bot suudab õigesti käivituda ja ühendada serveriga.
 
-<img src="readme_images/clone_repo.png" width=60%>
+Kui kõik on õigesti seadistatud, saad boti käivitada:
+````
+python main.py
+````
+Kui bot ühendub edukalt, peaksid terminalis nägema:
 
-4. Kontrolli, kas Interpreter on seatud. 
-Vali ükskõik milline versioon
+__BotName is now running!__
 
-<img src="readme_images/interpreter.png" width=30%>
+## 💬 Sõnumite lugemine
+Pane bot reageerima sõnumitele __on_message()__ meetodiga __main.py__ failis.
 
-5. Lisa uus fail. 
-Klõpsa kaustale esmalt, siis vali tavaline "File"
+Lisa tingimus, et bot vastaks sõnumitele vaid siis, kui need EI alga küsimärgiga.
 
-<img src="readme_images/new_file.png" width=70%>
+Testi discordis küsimärki sisestades!
 
-6. Loo ENV-fail oma Discordi tokenile. 
-Kirjuta ".env"
+## 🎲 Märgusõnadele vastamine
+Suundu __cogs__ kausta ja sealt leiad faili __quoting.py__. Siia klass on vaja lisada __get_response__ meetodi väljakutse ja botile peab selle Cogi ka lisama. 
 
-<img src="readme_images/ENV-file.png" width=30%>
+Seejärel vaata faili __quotes.py__.
 
-7. Lisa oma token. 
-Kirjuta `TOKEN=` ja pane selle taha oma token
+1. Loo meetod, mis tagastab juhusliku täringu tulemuse.
 
-<img src="readme_images/token.png" width=60%>
+2. Nüüd loo meetod, mis annab juhusliku tsitaadi. Selleks pead tsitaate lisama märgusõna ja vastuse sõnastikku __responses__.
 
-8. Leia terminal. 
-All vasakus nurgas või Alt+F12
+Seerjärel on sul vaja __main-py__ failis kasutada __pathlib.Path__ abil kõigi __.py__ failide otsimiseks ja nende laadimiseks load_extension() kaudu, et bot leiaks __cogs__ kasuta.
+Testi discordis __?roll__ ja __responses__ sõnastiku võtmeid kirjutades!
 
-<img src="readme_images/terminal.png" width=90%>
+## 🐶 ASCII koer
+Suundu __cogs__ kausta ja sealt leiad faili __dog.py__. 
 
-9. Kirjuta terminali: 
-```
-pip install discord 
-pip install python-dotenv
-```
+1. Kõigepealt kontrolli, kas fail __dog__ eksisteerib ja lisa logimine juhuks, kui fail jääb leidmata.
 
+2. Lisa uus käsk meetodi __create_dog__, mis loeb ASCII-kunsti __dog__ failist.
+
+Testi discordis __?mouse__ pannes!
+
+## 📜 Tsiteerimine
+Failist __quotes.py__ leiad tsitaatide loend.
+
+Lisa oma lemmiktsitaadid järjendisse __quotes__.
+
+Testi discordis __?quote__ pannes!
+
+## 🔄 Extra
+Kui oled kõik eelnevad ülesanded lahendanud, proovi teha järgmist:
+- ⭐ Lisa uus käsk ?ping, mis tagastab boti latentsuse (pingi) millisekundites
+- ⭐ Lisa logimine, et bot saaks terminalis logida kõiki käske, mida kasutajad sisestavad
+- ⭐ Lisa kasutajate statistikafunktsioon (nt mitu käsku on botilt küsitud)
