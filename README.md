@@ -17,18 +17,18 @@ Täna proovime kätt nii dicord.py teegi kasutamise, .env faili loomise kui ka c
 
 ## Setup
 Kõigepealt suundu terminali ja sisesta:
-````
+````bash
 pip install discord.py python-dotenv
 ````
-Nüüd loo .env fail ja määra sinna oma Discordi boti token:
-````
+Nüüd loo `.env` fail ja määra sinna oma Discordi boti token:
+````py
 TOKEN=siia_oma_boti_token
 ````
 
 ## 🤖 Boti käivitamine
 Failis main.py on peamine boti loogika. Kontrolli, kas bot suudab õigesti käivituda ja ühendada serveriga.
 
-Kui kõik on õigesti seadistatud, saad boti käivitada:
+Kui kõik on õigesti seadistatud, saad boti käivitada (terminalis alloleva käsuga või vajutades üleval paremal rohelist kolmnurka):
 ````
 python main.py
 ````
@@ -44,7 +44,7 @@ Lisa tingimus, et bot vastaks sõnumitele vaid siis, kui need EI alga küsimärg
 Testi discordis küsimärki sisestades!
 
 ## 🎲 Märgusõnadele vastamine
-Suundu __cogs__ kausta ja sealt leiad faili __quoting.py__. Siia klass on vaja lisada __get_response__ meetodi väljakutse ja botile peab selle Cogi ka lisama. 
+Suundu __cogs__ kausta ja sealt leiad faili __quoting.py__. Sinna klassi on vaja lisada __get_response__ meetodi väljakutse ja botile peab klassi Cog objektina ka lisama. 
 
 Seejärel vaata faili __quotes.py__.
 

@@ -11,15 +11,19 @@ intents = Intents.default()
 intents.message_content = True
 client = commands.Bot(command_prefix="?", intents=intents)
 
-# TODO
+# TODO 1: Print a message that the bot is up and running bot's name is stored in client.name
 @client.event
 async def on_ready():
-    pass
+    BOT_NAME = "[GET THE BOT NAME]"
+    print(BOT_NAME, "is now running!")
 
-# TODO
+# TODO 2: Read the messages and choose what to do with the content of them
+# The received message is stored in message.content
 @client.event
 async def on_message(message: Message):
-    pass
+    if ... .startswith("?"):
+        await client.process_commands(message)
+        return
 
 def main():
     token = config.get("TOKEN")

@@ -10,7 +10,8 @@ client = commands.Bot(command_prefix="?", intents=intents)
 
 @client.event
 async def on_ready():
-    print(f"{client.user} is now running!")
+    BOT_NAME = client.user
+    print(BOT_NAME, "is now running!")
 
 
 if __name__ == "__main__":

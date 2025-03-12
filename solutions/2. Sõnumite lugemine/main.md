@@ -49,7 +49,8 @@ __on_ready()__ meetod käivitub iga kord kui Bot aktiviseerub ehk jooksma pannak
 ```py
 @client.event
 async def on_ready():
-    print(f"{client.user} is now running!")
+    BOT_NAME = client.user
+    print(BOT_NAME, "is now running!")
 ```
 
 <span style="color:pink">__on_message()__ meetod käivitatakse iga kord, kui keegi chati sõnumi saadab. Kui saadetud sõna algab küsimärgiga, siis 
