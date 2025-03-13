@@ -13,6 +13,6 @@ class Dog(commands.Cog):
     # proovi avada ja lugeda failina open("../dog", "r"). Seejärel saada loetu ctx.send(f"{*eelnev*}") meetodiga
 
 # TODO
-async def setup(bot):
+def setup(bot):
     pass
 # bot.add_cog() vajab selle klassi nime ja klassinimi tahab bot muutujat.

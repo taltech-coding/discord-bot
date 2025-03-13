@@ -15,6 +15,6 @@ class Quotes(commands.Cog):
     # ctx.send() sisse saab panna meetodi, mida siis käsuna rakendatakse.
 
 # TODO
-async def setup(bot):
+def setup(bot):
     pass
 # bot.add_cog() vajab selle klassi nime ja klassinimi tahab bot muutujat.
