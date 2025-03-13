@@ -15,6 +15,11 @@ Laeme enda .env-failide leidmiseks vajaliku liidese.
 from dotenv import dotenv_values
 ```
 
+Impordime ka __response__ klassi __get_response__ meetodi.
+```py
+from response import get_response
+```
+
 Salvestame __config__ muutujasse tokeni väärtuse, otsides tervest projektist .env nimelisi faile ja kaustu.
 ```py
 config = dotenv_values(".env")

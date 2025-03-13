@@ -1,6 +1,6 @@
 from random import choice
 
-# TODO
+# TODO: 4. Tsiteerimine
 quotes = [""]
 
 def get_quote():

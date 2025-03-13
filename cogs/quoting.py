@@ -3,17 +3,18 @@ from quotes import get_quote
 
 
 class Quotes(commands.Cog):
-    """TODO 4: """
+    # TODO: 4. Tsiteerimine
     def __init__(self, bot):
-        # self.bot = ...
-        ...
-    
+        pass
+    # self.bot = ???
     
     # TODO
     @commands.command(name="quote", help="get a random quote")
     async def quote(self, ctx):
         pass
+    # ctx.send() sisse saab panna meetodi, mida siis käsuna rakendatakse.
 
 # TODO
 async def setup(bot):
     pass
+# bot.add_cog() vajab selle klassi nime ja klassinimi tahab bot muutujat.
