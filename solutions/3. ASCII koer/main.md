@@ -63,9 +63,8 @@ async def on_ready():
 peame selle kausta pythoni-failid (ilma faililaiendita) kohe alguses importima, et kohe alla laadida.</span>
 
 ```py
-    for filename in os.listdir('/cogs'):
-        if filename.endswith('.py'):
-            await client.load_extension(f'cogs.{filename[:-3]}')
+    for file in pathlib.Path("cogs").rglob("*.py"):
+        await client.load_extension(".".join(file.with_suffix("").parts))
 ```
 
 __on_message()__ meetod käivitatakse iga kord, kui keegi chati sõnumi saadab. Kui saadetud sõna algab küsimärgiga, siis 
