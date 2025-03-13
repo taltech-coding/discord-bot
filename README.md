@@ -45,18 +45,20 @@ Sõnumit saab saata järgneva käsuga: `await message.channel.send(response)`, k
 Testi discordis küsimärki sisestades!
 
 ## 🎲 3. Märgusõnadele vastamine
-Suundu __cogs__ kausta ja sealt leiad faili __quoting.py__. Sinna klassi on vaja lisada __get_response__ meetodi väljakutse ja botile peab klassi Cog objektina ka lisama. 
+Liigu faili __response.py__
 
-Seejärel vaata faili __quotes.py__.
+1. 
 
-1. Loo meetod, mis tagastab juhusliku täringu tulemuse.
+2. Lisa __roll_dice()__ meetodisse õige vahemik (nt on tavlise täringu nmbrite vahemik 1-6)
 
-2. Nüüd loo meetod, mis annab juhusliku tsitaadi. Selleks pead tsitaate lisama märgusõna ja vastuse sõnastikku __responses__.
 
-Seerjärel on sul vaja __main-py__ failis kasutada __pathlib.Path__ abil kõigi __.py__ failide otsimiseks ja nende laadimiseks load_extension() kaudu, et bot leiaks __cogs__ kasuta.
+Seerjärel on sul vaja __main.py__ failis kasutada __pathlib.Path__ abil kõigi __.py__ failide otsimiseks ja nende laadimiseks load_extension() kaudu, et bot leiaks __cogs__ kasuta.
 Testi discordis __?roll__ ja __responses__ sõnastiku võtmeid kirjutades!
 
 ## 🐶 4. ASCII koer
+Suundu __cogs__ kausta ja sealt leiad faili __quoting.py__. 
+Kõigepealt lisa `__init__(self, bot)` meetodisse viide botile (selleks et saaks boti kasutada ka siin failis). Vihje: viide botile on `bot`, mis on `__init__` meetodi üks parameetritest.
+
 Suundu __cogs__ kausta ja sealt leiad faili __dog.py__. 
 
 1. Kõigepealt kontrolli, kas fail __dog__ eksisteerib ja lisa logimine juhuks, kui fail jääb leidmata.
