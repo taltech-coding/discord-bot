@@ -25,25 +25,26 @@ Nüüd loo `.env` fail ja määra sinna oma Discordi boti token:
 TOKEN=siia_oma_boti_token
 ````
 
-## 🤖 Boti käivitamine
+## 🤖 1. Boti käivitamine
 Failis main.py on peamine boti loogika. Kontrolli, kas bot suudab õigesti käivituda ja ühendada serveriga.
 
 Kui kõik on õigesti seadistatud, saad boti käivitada (terminalis alloleva käsuga või vajutades üleval paremal rohelist kolmnurka):
 ````
 python main.py
 ````
-Kui bot ühendub edukalt, peaksid terminalis nägema:
+Kui bot ühendub edukalt, peaksid terminalis nägema midagi sellist:
 
-__BotName is now running!__
+__BotName#1234 is now running!__
 
-## 💬 Sõnumite lugemine
-Pane bot reageerima sõnumitele __on_message()__ meetodiga __main.py__ failis.
+## 💬 2. Sõnumite lugemine
+Pane bot reageerima sõnumitele kasutades __on_message()__ meetodit __main.py__ failis.
 
 Lisa tingimus, et bot vastaks sõnumitele vaid siis, kui need EI alga küsimärgiga.
+Sõnumit saab saata järgneva käsuga: `await message.channel.send(response)`, kus response on näiteks "Hello".
 
 Testi discordis küsimärki sisestades!
 
-## 🎲 Märgusõnadele vastamine
+## 🎲 3. Märgusõnadele vastamine
 Suundu __cogs__ kausta ja sealt leiad faili __quoting.py__. Sinna klassi on vaja lisada __get_response__ meetodi väljakutse ja botile peab klassi Cog objektina ka lisama. 
 
 Seejärel vaata faili __quotes.py__.
@@ -55,7 +56,7 @@ Seejärel vaata faili __quotes.py__.
 Seerjärel on sul vaja __main-py__ failis kasutada __pathlib.Path__ abil kõigi __.py__ failide otsimiseks ja nende laadimiseks load_extension() kaudu, et bot leiaks __cogs__ kasuta.
 Testi discordis __?roll__ ja __responses__ sõnastiku võtmeid kirjutades!
 
-## 🐶 ASCII koer
+## 🐶 4. ASCII koer
 Suundu __cogs__ kausta ja sealt leiad faili __dog.py__. 
 
 1. Kõigepealt kontrolli, kas fail __dog__ eksisteerib ja lisa logimine juhuks, kui fail jääb leidmata.
@@ -64,7 +65,7 @@ Suundu __cogs__ kausta ja sealt leiad faili __dog.py__.
 
 Testi discordis __?mouse__ pannes!
 
-## 📜 Tsiteerimine
+## 📜 5. Tsiteerimine
 Failist __quotes.py__ leiad tsitaatide loend.
 
 Lisa oma lemmiktsitaadid järjendisse __quotes__.

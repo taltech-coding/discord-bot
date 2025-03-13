@@ -3,10 +3,12 @@ from quotes import get_quote
 
 
 class Quotes(commands.Cog):
-    # TODO
+    """TODO 4: """
     def __init__(self, bot):
-        pass
-
+        # self.bot = ...
+        ...
+    
+    
     # TODO
     @commands.command(name="quote", help="get a random quote")
     async def quote(self, ctx):
