@@ -1,4 +1,4 @@
-import pathlib
+import os
 
 from dotenv import dotenv_values
 from discord import Intents, Message
