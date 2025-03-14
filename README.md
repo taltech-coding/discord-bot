@@ -94,7 +94,7 @@ Testi discordis __?quote__ pannes!
 
 ## 🔄 Extra
 Kui oled kõik eelnevad ülesanded lahendanud, proovi teha järgmist:
-- ⭐ Kui kasutaja sisestab roll_dice, tagasta suvaline arv. Seda saad __response.py__ __get_response__ meetodisse lisada.
+- Tase ⭐ Kui kasutaja sisestab roll_dice, tagasta suvaline arv. Seda saad __response.py__ __get_response__ meetodisse lisada.
 <details>
   <summary>Spoiler</summary>
 
@@ -106,7 +106,7 @@ Kui oled kõik eelnevad ülesanded lahendanud, proovi teha järgmist:
             return responses[lowered]
 </details>
 
-- Tase ⭐ Lisa uus käsk __!delete__ __[@username]__, mida väljakutsudes bot teavitab:"__[@username]__ has been permanently deleted. Goodbye forever. 👋"
+- Tase ⭐⭐ Lisa uus käsk __!delete__ __[@username]__, mida väljakutsudes bot teavitab:"__[@username]__ has been permanently deleted. Goodbye forever. 👋"
 <details>
   <summary>Spoiler</summary>
 Leitav on_message meetodis message.author kasutades.
