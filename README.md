@@ -57,6 +57,14 @@ Järgmisena hakkame käske tegema. Kõikidele käskudele teeme eraldi klassi __c
 1. Lisa uus käsk meetodi __create_dog__, mis loeb ASCII-kunsti __dog__ failist.
 2. Kõigepealt on vaja kontrollida, kas fail __dog__ eksisteerib ja lisa logimine juhuks, kui fail jääb leidmata. __ctx.send__ sisse pane loetud faili andmed.
 __ctx__ parameeter on sarnane __message__ parameetriga __main.py__ failis, temalt saab teada nii sõnumi autori, sisu, kanali ja lisaks saab temaga sõnumit saata __ctx.send__ teel.
+````
+        try:
+            with open("*failinimi siia*", "r") as file:
+                content = file.read()
+            await ctx.send(f"```{content}```")
+        except Exception as e:
+            print(f"Error loading dog art: {e}")
+````
 3. __setup__ meetodis anna botile kaasa __add_cog__ meetod ning selle sisse omakorda klassinimi ja käsk. Sedamoodi saad botile käske lisada.
 
 Nüüd peame taaskord __main.py__ faili  
@@ -101,7 +109,7 @@ Kui oled kõik eelnevad ülesanded lahendanud, proovi teha järgmist:
 - Tase ⭐ Lisa uus käsk __!delete__ __[@username]__, mida väljakutsudes bot teavitab:"__[@username]__ has been permanently deleted. Goodbye forever. 👋"
 <details>
   <summary>Spoiler</summary>
-Leitav on_message meetodis __message.author__ kasutades.
+Leitav on_message meetodis message.author kasutades.
 </details>
 
-- Tase ⭐⭐⭐ meetod, mis salvestab tekstifaili kõik, mida kasutajad sisestavad.
+- Tase ⭐⭐⭐ Lisa meetod, mis salvestab tekstifaili kõik, mida kasutajad sisestavad.
