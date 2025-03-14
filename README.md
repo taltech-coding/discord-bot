@@ -26,48 +26,61 @@ Nüüd loo `.env` fail ja määra sinna oma Discordi boti token:
 TOKEN=siia_oma_boti_token
 ````
 
-## 🤖 Boti käivitamine
-Failis main.py on peamine boti loogika. Kontrolli, kas bot suudab õigesti käivituda ja ühendada serveriga.
+## 🤖 1. Boti käivitamine
+Failis __main.py__ on __on_ready()__ meetod,mis käivitub esimesena kui bot käivitub. 
+Lisa sinna __print__ lause, mis annaks märku, et bot käivitus. Selleks kasuta __client.user__ muutujat.
+Pea meeles, et iga __async__ meetod tahab __await__ sõna ette, kui tegutsetakse boti või failist lugemisega, kui mitte __print__ lause! 
 
 Kui kõik on õigesti seadistatud, saad boti käivitada:
 ````
 python main.py
 ````
-Kui bot ühendub edukalt, peaksid terminalis nägema kõigepealt 2 punast rida ning seejärel:
-
-__SinuBotiNimi#1234 is now running!__
+Kui bot ühendub edukalt, peaksid terminalis nägema kõigepealt 2 punast rida ning seejärel oma boti nime.
 
 ## 💬 2. Märgusõnadele vastamine
 Liigu faili __response.py__
 
-1. Lisa sõnastikku __responses__ võtmeks mõni märgusõna ja väärtuseks lause, mida sa tahad, et bot vastaks chatis märgusõna peale.
+1. Lisa sõnastikku __responses__ võtmeks mõni märgusõna ja väärtuseks lause, mida sa tahad, et bot vastaks chatis märgusõnale.
 2. __get_response__ meetodisse lisa __if__ tingimus, kui __user_input__ leidub __responses__ võtmete hulgas, siis tagasta selle võtme väärtus.
 
 Seejärel suundume __main.py__ faili tagasi.
 
-1. __on_message__ meetodisse on vaja oma korda küsida ega chati sõnum pole __response__ sõnastikus mõni võti. Kui oli, siis bot saab saata vastuse käsuga: `await message.channel.send(response)`.
+3. __on_message__ meetod loeb igat sõnumit, mida kanalisse kirjutakse ja kõiki andmeid selle sõnumi kohta. 
+Näiteks __message.content__ annab sõnumi sisu, __message.author__ sõnumi autor, __message.channel__ sõnumi saatmise kanali jne.
+Kasuta __message.content__ meetodit uurimaks, ega pole kirjutatud chatis __response__ sõnastiku mõnda võtit. Kasuta __if__ tingimust, saates sellisel juhul vastuse: `await message.channel.send(?)`.
 
 Testi discordis oma võtmeid sisestades!
 
 ## 🐶 4. ASCII koer
-Järgmisema hakkame käske tegema. Kõikidele käskudele teeme eraldi klassi __cogs__ kaustas, alustades __dogs.py__ failist.
+Järgmisena hakkame käske tegema. Kõikidele käskudele teeme eraldi klassi __cogs__ kaustas, alustades __dogs.py__ failist.
 
-1. Kõigepealt kontrolli, kas fail __dog__ eksisteerib ja lisa logimine juhuks, kui fail jääb leidmata.
-2. Lisa uus käsk meetodi __create_dog__, mis loeb ASCII-kunsti __dog__ failist.
+1. Lisa uus käsk meetodi __create_dog__, mis loeb ASCII-kunsti __dog__ failist.
+2. Kõigepealt on vaja kontrollida, kas fail __dog__ eksisteerib ja lisa logimine juhuks, kui fail jääb leidmata. __ctx.send__ sisse pane loetud faili andmed.
+__ctx__ parameeter on sarnane __message__ parameetriga __main.py__ failis, temalt saab teada nii sõnumi autori, sisu, kanali ja lisaks saab temaga sõnumit saata __ctx.send__ teel.
+3. __setup__ meetodis anna botile kaasa __add_cog__ meetod ning selle sisse omakorda klassinimi ja käsk. Sedamoodi saad botile käske lisada.
 
 Nüüd peame taaskord __main.py__ faili  
 
-1. Lisame __on_message__ meetodisse __if__ tingimuse, juhuks kui chatis sõnum algab küsimärgiga. Siis on vaja kasutada käsku __client.process_commands(message)__.
-2. Järgmisena lisa __on_ready__ meetodisse "laisk laadimine" cogs kaustale. Niimoodi saab bot kohe käivitudes käskudest aru. 
-
+1. Lisame __on_message__ meetodisse __if__ tingimuse, juhuks kui chatis sõnum algab küsimärgiga. Käskude leidmiseks sõnumite seas on vaja eraldi __client.process_commands(?)__ meetodit.
+2. Järgmisena lisa __on_ready__ meetodisse cogs kausta klasside laadimine (kui pole veel kordagi allalaetud). Niimoodi saab bot kohe käivitudes käskudest aru. 
+````python
+for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+            extension = f'cogs.{filename[:-3]}'
+            if extension not in client.extensions:
+                try:
+                    client.load_extension(extension)
+                    print(f"Loaded extension: {extension}")
+                except Exception as e:
+                    print(f"Failed to load extension {extension}: {e}")
+````
 Testi discordis __?mouse__ pannes!
 
 ## 📜 5. Tsiteerimine
-Teine käsu teeme __cogs__ kaustas __quoting.py__ faili. Seal on vaja defineerida, et __quotes.py__ failist __get_quote__  
-meetodist saad tsitaadid.
 
-Edasi minegi __quotes.py__ faili __main.py__ faili all ja kirjuta __quotes__ järjendisse mitmerealiselt oma lemmiktsitaate. Kui kirjutad ühte ritta kõik,
-saad tekstibloki ?quote chatis välja kutsudes.
+1. Teine käsu teeme __cogs__ kaustas __quoting.py__ faili. Seal on vaja defineerida, et __quotes.py__ failist __get_quote__ meetodist saad tsitaadid.
+2. Samamoodi lisa __ctx.send__ lause ning lisa botile __setup__ meetodis klass ja meetod.
+3. Edasi minegi __quotes.py__ faili __main.py__ faili all ja kirjuta __quotes__ järjendisse mitmerealiselt oma lemmiktsitaate. Kui kirjutad ühte ritta kõik, saad tekstibloki käsku ?quote chatis kirjutades.
 
 Testi discordis __?quote__ pannes!
 
@@ -86,4 +99,9 @@ Kui oled kõik eelnevad ülesanded lahendanud, proovi teha järgmist:
 </details>
 
 - Tase ⭐ Lisa uus käsk __!delete__ __[@username]__, mida väljakutsudes bot teavitab:"__[@username]__ has been permanently deleted. Goodbye forever. 👋"
+<details>
+  <summary>Spoiler</summary>
+Leitav on_message meetodis __message.author__ kasutades.
+</details>
+
 - Tase ⭐⭐⭐ meetod, mis salvestab tekstifaili kõik, mida kasutajad sisestavad.
