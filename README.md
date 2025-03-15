@@ -88,7 +88,7 @@ Testi discordis __?mouse__ pannes!
 
 1. Teine käsu teeme __cogs__ kaustas __quoting.py__ faili. Seal on vaja defineerida, et __quotes.py__ failist __get_quote__ meetodist saad tsitaadid.
 2. Samamoodi lisa __ctx.send__ lause ning lisa botile __setup__ meetodis klass ja meetod.
-3. Edasi minegi __quotes.py__ faili __main.py__ faili all ja kirjuta __quotes__ järjendisse mitmerealiselt oma lemmiktsitaate. Kui kirjutad ühte ritta kõik, saad tekstibloki käsku ?quote chatis kirjutades.
+3. Edasi minegi __quotes.py__ faili __main.py__ faili all ja kirjuta __quotes__ järjendisse  oma lemmiktsitaate. Eralda kõik tsitaadd komaga, muidu saad tekstibloki käsku ?quote chatis kirjutades.
 
 Testi discordis __?quote__ pannes!
 
