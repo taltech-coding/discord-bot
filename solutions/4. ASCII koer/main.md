@@ -5,21 +5,14 @@
 __Intents__ on "load", mille andsime Discord Developer Portalis Botile.
 __Message__ "lubab" Botil sõnumeid saata.
 __commands__ abil saab Bot reageerida käskudele.
-<span style="color:pink">Lisame juurde __os__ impordi, et lugeda repo piires faile.</span>
 ```py
 from discord import Intents, Message
 from discord.ext import commands
-import os
 ```
 
 Laeme enda .env-failide leidmiseks vajaliku liidese.
 ```py
 from dotenv import dotenv_values
-```
-
-Impordime ka __response__ klassi __get_response__ meetodi.
-```py
-from response import get_response
 ```
 
 Salvestame __config__ muutujasse tokeni väärtuse, otsides tervest projektist .env nimelisi faile ja kaustu.
@@ -65,15 +58,9 @@ async def on_ready():
 peame selle kausta pythoni-failid (ilma faililaiendita) kohe alguses importima, et kohe alla laadida.</span>
 
 ```py
-    for filename in os.listdir('./cogs'):
+    for filename in os.listdir('/cogs'):
         if filename.endswith('.py'):
-            extension = f'cogs.{filename[:-3]}'
-            if extension not in client.extensions:
-                try:
-                    client.load_extension(extension)
-                    print(f"Loaded extension: {extension}")
-                except Exception as e:
-                    print(f"Failed to load extension {extension}: {e}")
+            await client.load_extension(f'cogs.{filename[:-3]}')
 ```
 
 __on_message()__ meetod käivitatakse iga kord, kui keegi chati sõnumi saadab. Kui saadetud sõna algab küsimärgiga, siis 

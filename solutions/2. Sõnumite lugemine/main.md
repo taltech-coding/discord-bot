@@ -15,11 +15,6 @@ Laeme enda .env-failide leidmiseks vajaliku liidese.
 from dotenv import dotenv_values
 ```
 
-<span style="color:pink">Impordime ka __response__ klassi __get_response__ meetodi.</span>
-```py
-from response import get_response
-```
-
 Salvestame __config__ muutujasse tokeni väärtuse, otsides tervest projektist .env nimelisi faile ja kaustu.
 ```py
 config = dotenv_values(".env")
@@ -54,7 +49,8 @@ __on_ready()__ meetod käivitub iga kord kui Bot aktiviseerub ehk jooksma pannak
 ```py
 @client.event
 async def on_ready():
-    print(f"{client.user} is now running!")
+    BOT_NAME = client.user
+    print(BOT_NAME, "is now running!")
 ```
 
 <span style="color:pink">__on_message()__ meetod käivitatakse iga kord, kui keegi chati sõnumi saadab. Kui saadetud sõna algab küsimärgiga, siis 
@@ -64,9 +60,9 @@ Kui sõnum ei alanud küsimärgiga, siis kontrollime ega see mõni meie sõnasti
 ```py
 @client.event
 async def on_message(message: Message):
-    response = get_response(message.content)
-    if response:
-        await message.channel.send(response)
+    if message.content.startswith("?"):
+        await client.process_commands(message)
+        return
 
 ```
 

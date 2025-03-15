@@ -50,7 +50,7 @@ __ctx.send__ tagab selle, et saadame õigesse kanalisse __content__ sõnumi ehk 
 main.py klassis cog kausta alla laadides otsitakse kõigepealt __setup__ meetodit ja __setup__ meetodi abil saame koera isendi alles luua.
 __add_cog__ meetod laseb meil automaatselt registeerida selle klassi käsud.
 ```py
-def setup(bot):
-    bot.add_cog(Dog(bot))
+async def setup(bot):
+    await bot.add_cog(Dog(bot))
 
 ```

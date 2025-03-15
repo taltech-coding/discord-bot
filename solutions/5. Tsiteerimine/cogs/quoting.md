@@ -12,6 +12,6 @@ class Quotes(commands.Cog):
     async def quote(self, ctx):
         await ctx.send(get_quote())
 
-def setup(bot):
-    bot.add_cog(Quotes(bot))
+async def setup(bot):
+    await bot.add_cog(Quotes(bot))
 ```

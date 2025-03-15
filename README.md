@@ -11,105 +11,74 @@
 
 
 ## Sissejuhatus
-Sinu väike käsilane sõprade spämmimises, vaenlaste luuramises ja raha teenimises!
-
-Täna loome Discordis töötava Chatbox-stiilis boti.
+Rahategemine pole kunagi olnud lihtsam!
+Täna proovime kätt nii discord.py teegi kasutamise, .env faili loomise kui ka cogs'ide abil koodi modulleerimisega.
 Ülesannete näidislahendused leiad solutions kaustast!
 
 ## Setup
 Kõigepealt suundu terminali ja sisesta:
-````
+````bash
 pip install discord.py python-dotenv
 ````
 Nüüd loo `.env` fail ja määra sinna oma Discordi boti token:
-````
+````py
 TOKEN=siia_oma_boti_token
 ````
 
 ## 🤖 1. Boti käivitamine
-Failis __main.py__ on __on_ready()__ meetod,mis käivitub esimesena kui bot käivitub. 
-Lisa sinna __print__ lause, mis annaks märku, et bot käivitus. Selleks kasuta __client.user__ muutujat.
-Pea meeles, et iga __async__ meetod tahab __await__ sõna ette, kui tegutsetakse boti või failist lugemisega, kui mitte __print__ lause! 
+Failis main.py on peamine boti loogika. Kontrolli, kas bot suudab õigesti käivituda ja ühendada serveriga.
 
-Kui kõik on õigesti seadistatud, saad boti käivitada:
+Kui kõik on õigesti seadistatud, saad boti käivitada (terminalis alloleva käsuga või vajutades üleval paremal rohelist kolmnurka):
 ````
 python main.py
 ````
-Kui bot ühendub edukalt, peaksid terminalis nägema kõigepealt 2 punast rida ning seejärel oma boti nime.
+Kui bot ühendub edukalt, peaksid terminalis nägema midagi sellist:
 
-## 💬 2. Märgusõnadele vastamine
+__BotName#1234 is now running!__
+
+## 💬 2. Sõnumite lugemine
+Pane bot reageerima sõnumitele kasutades __on_message()__ meetodit __main.py__ failis.
+
+Testi discordis küsimärki sisestades (nt ?help)!
+
+## 🎲 3. Märgusõnadele vastamine
 Liigu faili __response.py__
 
-1. Lisa sõnastikku __responses__ võtmeks mõni märgusõna ja väärtuseks lause, mida sa tahad, et bot vastaks chatis märgusõnale.
-2. __get_response__ meetodisse lisa __if__ tingimus, kui __user_input__ leidub __responses__ võtmete hulgas, siis tagasta selle võtme väärtus.
+1. Lisa __main.py__ faili __on_message()__ meetodi alla response'i saamine ning vastuse saatmine.
+2. Liigu __response.py__ faili ning lisa responses muutujasse uued commandid ja vastused.
+3. Saada tagasi õige vastus kasutaja sisendile __get_response()__ meetodis.
 
-Seejärel suundume __main.py__ faili tagasi.
+4. Lisa __roll_dice()__ meetodis õige vahemik (nt on tavalise täringu numbrite vahemik 1-6).
 
-3. __on_message__ meetod loeb igat sõnumit, mida kanalisse kirjutakse ja kõiki andmeid selle sõnumi kohta. 
-Näiteks __message.content__ annab sõnumi sisu, __message.author__ sõnumi autor, __message.channel__ sõnumi saatmise kanali jne.
-Kasuta __message.content__ meetodit uurimaks, ega pole kirjutatud chatis __response__ sõnastiku mõnda võtit. Kasuta __if__ tingimust, saates sellisel juhul vastuse: `await message.channel.send(?)`.
 
-Testi discordis oma võtmeid sisestades!
+<!-- Seerjärel on sul vaja __main.py__ failis kasutada __pathlib.Path__ abil kõigi __.py__ failide otsimiseks ja nende laadimiseks load_extension() kaudu, et bot leiaks __cogs__ kasuta.
+Testi discordis __?roll__ ja __responses__ sõnastiku võtmeid kirjutades! -->
 
 ## 🐶 4. ASCII koer
-Järgmisena hakkame käske tegema. Kõikidele käskudele teeme eraldi klassi __cogs__ kaustas, alustades __dogs.py__ failist.
+<!-- Suundu __cogs__ kausta ja sealt leiad faili __quoting.py__.  -->
 
-1. Lisa uus käsk meetodi __create_dog__, mis loeb ASCII-kunsti __dog__ failist.
-2. Kõigepealt on vaja kontrollida, kas fail __dog__ eksisteerib ja lisa logimine juhuks, kui fail jääb leidmata. __ctx.send__ sisse pane loetud faili andmed.
-__ctx__ parameeter on sarnane __message__ parameetriga __main.py__ failis, temalt saab teada nii sõnumi autori, sisu, kanali ja lisaks saab temaga sõnumit saata __ctx.send__ teel.
-````
-        try:
-            with open("*failinimi siia*", "r") as file:
-                content = file.read()
-            await ctx.send(f"```{content}```")
-        except Exception as e:
-            print(f"Error loading dog art: {e}")
-````
-3. __setup__ meetodis anna botile kaasa __add_cog__ meetod ning selle sisse omakorda klassinimi ja käsk. Sedamoodi saad botile käske lisada.
 
-Nüüd peame taaskord __main.py__ faili  
+Suundu __cogs__ kausta ja sealt leiad faili __dog.py__. 
 
-1. Lisame __on_message__ meetodisse __if__ tingimuse, juhuks kui chatis sõnum algab küsimärgiga. Käskude leidmiseks sõnumite seas on vaja eraldi __client.process_commands(?)__ meetodit.
-2. Järgmisena lisa __on_ready__ meetodisse cogs kausta klasside laadimine (kui pole veel kordagi allalaetud). Niimoodi saab bot kohe käivitudes käskudest aru. 
-````python
-for filename in os.listdir('./cogs'):
-        if filename.endswith('.py'):
-            extension = f'cogs.{filename[:-3]}'
-            if extension not in client.extensions:
-                try:
-                    client.load_extension(extension)
-                    print(f"Loaded extension: {extension}")
-                except Exception as e:
-                    print(f"Failed to load extension {extension}: {e}")
-````
-Testi discordis __?mouse__ pannes!
+1. Kõigepealt lisa `__init__(self, bot)` meetodisse viide botile (selleks et saaks boti kasutada ka __dog.py__ failis). Vihje: viide botile on `bot`, mis on `__init__` meetodi üks parameetritest (parameeter on sulgude sees).
+2. Kontrolli, kas fail __dog__ eksisteerib (see peaks olema samas kaustas kus __main.py__).
+3. Lisa õige faili nimi, loe andmeid failist ning saada tagasi ASCII pilt koerast. 
+
+
+Testi discordis __?mouse__ pannes (või see mis sa käsu nimeks panid)!
 
 ## 📜 5. Tsiteerimine
+Failist __quotes.py__ leiad tsitaatide loendi.
 
-1. Teine käsu teeme __cogs__ kaustas __quoting.py__ faili. Seal on vaja defineerida, et __quotes.py__ failist __get_quote__ meetodist saad tsitaadid.
-2. Samamoodi lisa __ctx.send__ lause ning lisa botile __setup__ meetodis klass ja meetod.
-3. Edasi minegi __quotes.py__ faili __main.py__ faili all ja kirjuta __quotes__ järjendisse mitmerealiselt oma lemmiktsitaate. Kui kirjutad ühte ritta kõik, saad tekstibloki käsku ?quote chatis kirjutades.
+1. Lisa oma lemmiktsitaadid järjendisse __quotes__.
+2. Mine __cogs__ kausta __quoting.py__ faili ning lisa viide botile `__init__(self, bot)` meetodis.
+3. Saada botiga suvaline tsitaat kasutades `get_quote()` meetodit. Sõnumi saatmine oli täpsemini kirjas neljandas ülesandes.
+4. Lisa funktsiooni registreerimine `setup()` meetodis. Vaata kuidas __dog.py__ failis `setup()` tehtud on (ning asenda `Dog` objekt `Quotes` objektiga)
 
 Testi discordis __?quote__ pannes!
 
 ## 🔄 Extra
 Kui oled kõik eelnevad ülesanded lahendanud, proovi teha järgmist:
-- Tase ⭐ Kui kasutaja sisestab roll_dice, tagasta suvaline arv. Seda saad __response.py__ __get_response__ meetodisse lisada.
-<details>
-  <summary>Spoiler</summary>
-
-    def get_response(user_input: str) -> str:
-        lowered: str = user_input.lower()
-        if "roll dice" in lowered:
-            return f":game_die: You rolled: {randint(1, 6)}"
-        elif lowered in responses.keys():
-            return responses[lowered]
-</details>
-
-- Tase ⭐⭐ Lisa uus käsk __!delete__ __[@username]__, mida väljakutsudes bot teavitab:"__[@username]__ has been permanently deleted. Goodbye forever. 👋"
-<details>
-  <summary>Spoiler</summary>
-Leitav on_message meetodis message.author kasutades.
-</details>
-
-- Tase ⭐⭐⭐ Lisa meetod, mis salvestab tekstifaili kõik, mida kasutajad sisestavad.
+- ⭐ Lisa uus käsk ?ping, mis tagastab boti latentsuse (pingi) millisekundites
+- ⭐ Lisa logimine, et bot saaks terminalis logida kõiki käske, mida kasutajad sisestavad
+- ⭐ Lisa kasutajate statistikafunktsioon (nt mitu käsku on botilt küsitud)

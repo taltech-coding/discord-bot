@@ -1,18 +1,24 @@
 from discord.ext import commands
 
 class Dog(commands.Cog):
-    # TODO: 3. ASCII koer
+    """ 
+    TODO 4.1: Add refernce to the bot. 
+    """ 
     def __init__(self, bot):
-        pass
-    # self.bot = ???
+        self.bot = ...  # Reference goes here (ie the paramater that is inside the brackets above)
 
-    # TODO
-    @commands.command(name="mouse", help="Draw a dog")
+
+    @commands.command(name="mouse", help="Draw a dog")  # Change the command name
     async def create_dog(self, ctx):
-        pass
-    # proovi avada ja lugeda failina open("../dog", "r"). Seejärel saada loetu ctx.send(f"{*eelnev*}") meetodiga
+        """
+        TODO 4.2 Fix the name of the command, read data from the file and send a message to discord.
+        """
+        # try:
+        #     with open("filename", "r") as file:  # Change the filename to the name given
+        #         content = ...  # Read the contents of the file
+        #         await ctx.send(f"```{}```")  # In the curly brackets add the content of the file
+        # except Exception as e:
+        #     print("Error while executing the dog command (see TODO 4.2)\n", e)
 
-# TODO
-def setup(bot):
-    pass
-# bot.add_cog() vajab selle klassi nime ja klassinimi tahab bot muutujat.
+async def setup(bot):
+    await bot.add_cog(Dog(bot))

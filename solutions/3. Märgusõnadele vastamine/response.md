@@ -30,6 +30,8 @@ Kui kasutaja sõnum (sõnum, mitte üksik sõna sõnumist) leidub meie sõnastik
 ```py
 def get_response(user_input: str) -> str:
     lowered: str = user_input.lower()
-    if lowered in responses.keys():
+    if "roll dice" in lowered:
+        return f":game_die: You rolled: {randint(1, 6)}"
+    elif lowered in responses.keys():
         return responses[lowered]
 ```
